@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Page Not Found — WebShield{% endblock %}
+{% block meta_description %}The page you requested could not be found on
+WebShield.{% endblock %}
+{% block content %}<section class="empty-page"><div
+        class="empty-code">404</div><h1>This page wandered off.</h1><p>The URL
+        may be outdated or the page may have moved.</p><a
+        class="button button-primary" href="{{ url_for('index') }}">Back to
+        WebShield home</a></section>{% endblock %}

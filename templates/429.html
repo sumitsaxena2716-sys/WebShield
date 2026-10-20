@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Slow Down — WebShield{% endblock %}
+{% block meta_description %}Please wait before making another WebShield
+request.{% endblock %}
+{% block content %}<section class="empty-page"><div
+        class="empty-code">429</div><h1>Let's take a short pause.</h1><p>Too
+        many requests were received. Wait a little and try again.</p><a
+        class="button button-primary" href="{{ url_for('index') }}">Return
+        home</a></section>{% endblock %}

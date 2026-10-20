@@ -1,0 +1,175 @@
+{% extends "base.html" %}
+{% block title %}WebShield — Automated Website Security Scanner{% endblock %}
+{% block meta_description %}Audit website security headers, HTTPS, page
+metadata, mobile viewport, and broken links with WebShield's defensive
+scanner.{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <div class="eyebrow"><span class="pulse-dot"></span> DEFENSIVE WEBSITE
+        AUDITING</div>
+      <h1>See your website's security posture <span>clearly.</span></h1>
+      <p class="hero-lead">A practical first-pass audit for security headers,
+        HTTPS, page metadata, mobile readiness, and broken links — with
+        actionable remediation guidance.</p>
+      <div class="hero-actions">
+        <a class="button button-primary" href="#scanner">Start a security scan
+          <span aria-hidden="true">→</span></a>
+        <a class="button button-ghost" href="{{ url_for('about') }}">How it
+          works</a>
+      </div>
+      <div class="trust-note"><span class="shield-mini">✓</span> Non-invasive
+        checks · TLS verification enabled · No exploit payloads</div>
+    </div>
+    <div class="hero-visual"
+      aria-label="Illustration of a website security dashboard">
+      <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+      <div class="security-card">
+        <div class="security-card-top"><span
+            class="window-dots"><i></i><i></i><i></i></span><span
+            class="live-label"><span></span> AUDIT READY</span></div>
+        <div class="shield-graphic"><svg viewBox="0 0 120 132" role="img"
+            aria-label="Shield icon"><path
+              d="M60 7 105 24v34c0 29-19 51-45 66C34 109 15 87 15 58V24L60 7Z"
+              fill="none" stroke="currentColor" stroke-width="4" /><path
+              d="m39 65 14 14 29-32" fill="none" stroke="currentColor"
+              stroke-width="6" stroke-linecap="round"
+              stroke-linejoin="round" /></svg></div>
+        <div class="visual-title">Security overview</div><div
+          class="visual-subtitle">Check configuration. Improve confidence.</div>
+        <div class="mini-metrics"><div><span
+              class="metric-icon green">✓</span><span><b>HTTPS</b><small>Transport
+                check</small></span></div><div><span
+              class="metric-icon blue">↗</span><span><b>Headers</b><small>Configuration
+                review</small></span></div><div><span
+              class="metric-icon violet">⌁</span><span><b>Links</b><small>Bounded
+                link audit</small></span></div></div>
+      </div>
+      <div class="floating-chip chip-top"><span class="chip-dot"></span> Secure
+        by design</div>
+      <div class="floating-chip chip-bottom"><span class="chip-check">✓</span>
+        Actionable findings</div>
+    </div>
+  </div>
+</section>
+
+<section class="scanner-section" id="scanner">
+  <div class="container">
+    <div class="section-heading">
+      <div class="eyebrow">WEBSITE AUDIT</div>
+      <h2>Run your first scan</h2>
+      <p>Only scan websites you own or have explicit permission to assess.</p>
+    </div>
+    <div class="scanner-layout">
+      <form id="scan-form" class="scanner-form">
+        <label for="target-url">Website URL</label>
+        <div class="url-input-wrap"><span aria-hidden="true">⌕</span><input
+            id="target-url" name="url" type="url"
+            placeholder="https://example.com" maxlength="2048" required
+            autocomplete="url"><button class="clear-input" type="button"
+            id="clear-url" aria-label="Clear URL">×</button></div>
+        <label class="consent-check"><input type="checkbox" id="authorized"
+            required><span>I own this website or have explicit permission to
+            scan it.</span></label>
+        <label class="consent-check"><input type="checkbox" id="check-links"
+            checked><span>Check a limited sample of links (may take
+            longer).</span></label>
+        <button id="scan-button" class="button button-primary scan-button"
+          type="submit"><span class="button-label">Run security scan</span><span
+            class="button-arrow" aria-hidden="true">→</span></button>
+        <p class="form-note"><span aria-hidden="true">ⓘ</span> This tool makes
+          ordinary HTTP requests. It does not exploit vulnerabilities or prove a
+          site is secure.</p>
+      </form>
+      <aside class="scan-side">
+        <div class="side-icon">✳</div><h3>What gets checked?</h3>
+        <ul class="check-list">
+          <li><span>✓</span> HTTPS and response status</li><li><span>✓</span>
+            Common security headers</li><li><span>✓</span> Page title and meta
+            description</li><li><span>✓</span> Mobile viewport
+            metadata</li><li><span>✓</span> Favicon
+            presence</li><li><span>✓</span> Bounded broken-link check</li>
+        </ul>
+        <div class="privacy-note"><span>🔒</span><p><b>Built for responsible
+              testing</b><br>Private and local network addresses are blocked by
+            the scanner.</p></div>
+      </aside>
+    </div>
+    <div id="status-message" class="status-message" role="status"
+      aria-live="polite" hidden></div>
+    <section id="results" class="results" aria-live="polite" hidden>
+      <div class="results-header"><div><div class="eyebrow">SCAN
+            REPORT</div><h2>Audit results</h2><p id="result-target"
+            class="muted"></p></div><button id="download-report"
+          class="button button-ghost" type="button">Download JSON report
+          ↓</button></div>
+      <div class="score-row">
+        <div class="score-card"><span class="muted">Indicative checklist
+            score</span><div class="score-number"><span
+              id="score-value">—</span><small>/100</small></div><div
+            class="score-track"><span id="score-bar"></span></div><p
+            class="tiny muted">Not a probability of compromise.</p></div>
+        <div class="summary-grid">
+          <div class="summary-item"><span class="summary-dot high"></span><b
+              id="count-high">0</b><small>High</small></div>
+          <div class="summary-item"><span class="summary-dot medium"></span><b
+              id="count-medium">0</b><small>Medium</small></div>
+          <div class="summary-item"><span class="summary-dot low"></span><b
+              id="count-low">0</b><small>Low</small></div>
+          <div class="summary-item"><span class="summary-dot info"></span><b
+              id="count-info">0</b><small>Info</small></div>
+        </div>
+      </div>
+      <div class="results-columns"><div><h3>Findings</h3><div id="findings-list"
+            class="findings-list"></div></div><div><h3>Broken links</h3><div
+            id="links-list" class="links-list"></div><div
+            class="page-info-card"><h3>Page details</h3><dl><dt>HTTP
+                status</dt><dd id="page-status">—</dd><dt>Page title</dt><dd
+                id="page-title">—</dd><dt>Meta description</dt><dd
+                id="page-description">—</dd><dt>Mobile viewport</dt><dd
+                id="page-viewport">—</dd><dt>Favicon URL</dt><dd
+                id="page-favicon">—</dd></dl></div></div></div>
+      <div class="limitations-box"><b>Interpretation note</b><p
+          id="limitations-text">Results are limited to the checks described in
+          the methodology.</p></div>
+    </section>
+  </div>
+</section>
+
+<section class="features-section" id="features">
+  <div class="container">
+    <div class="section-heading"><div class="eyebrow">BUILT FOR
+        CLARITY</div><h2>Find issues. Know what to do next.</h2><p>WebShield
+        translates common configuration signals into understandable next
+        steps.</p></div>
+    <div class="feature-grid">
+      <article class="feature-card"><div
+          class="feature-icon icon-blue">⌘</div><h3>Security
+          headers</h3><p>Review common browser protections and see which headers
+          need attention.</p></article>
+      <article class="feature-card"><div
+          class="feature-icon icon-green">↗</div><h3>Transport &
+          TLS</h3><p>Check HTTPS usage while keeping certificate verification
+          enabled.</p></article>
+      <article class="feature-card"><div
+          class="feature-icon icon-purple">☷</div><h3>Site quality</h3><p>Review
+          metadata, viewport configuration, favicon hints, and link
+          responses.</p></article>
+      <article class="feature-card"><div
+          class="feature-icon icon-orange">◎</div><h3>Clear next
+          steps</h3><p>Each finding includes a short explanation and a practical
+          remediation suggestion.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="responsible-section" id="safety"><div
+    class="container responsible-card"><div
+      class="responsible-icon">⚑</div><div><h2>Use it responsibly</h2><p>Scan
+        only assets you own or have written authorization to assess. WebShield
+        performs non-invasive checks and intentionally avoids exploit payloads,
+        port scanning, brute force, and destructive tests.</p></div><a
+      href="{{ url_for('about') }}" class="text-link">Read methodology
+      →</a></div></section>
+{% endblock %}

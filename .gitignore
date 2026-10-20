@@ -1,0 +1,14 @@
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.env
+webshield.db
+.pytest_cache/
+.coverage
+htmlcov/
+dist/
+build/
+*.db
+.env.*
+!.env.example

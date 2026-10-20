@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0b1220">
+    <meta name="description"
+      content="{% block meta_description %}WebShield checks public website security headers, HTTPS, metadata, and broken links.{% endblock %}">
+    <title>{% block title %}WebShield — Website Security Scanner{% endblock
+      %}</title>
+    <link rel="icon" type="image/svg+xml"
+      href="{{ url_for('static', filename='favicon.svg') }}">
+    <link rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}">
+    <script defer src="{{ url_for('static', filename='js/app.js') }}"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a class="brand" href="{{ url_for('index') }}"
+          aria-label="WebShield home">
+          <span class="brand-mark"
+            aria-hidden="true">W</span><span>WebShield</span>
+        </a>
+        <button class="menu-toggle" type="button" aria-expanded="false"
+          aria-controls="primary-nav" aria-label="Open navigation">
+          <span></span><span></span><span></span>
+        </button>
+        <nav id="primary-nav" class="primary-nav" aria-label="Main navigation">
+          <a href="{{ url_for('index') }}#scanner">Scanner</a>
+          <a href="{{ url_for('index') }}#features">Features</a>
+          <a href="{{ url_for('about') }}">About</a>
+          <a class="nav-cta" href="{{ url_for('index') }}#scanner">Run a scan
+            <span aria-hidden="true">↗</span></a>
+        </nav>
+      </div>
+    </header>
+    <main id="main">
+      {% block content %}{% endblock %}
+    </main>
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <a class="brand footer-brand" href="{{ url_for('index') }}"><span
+              class="brand-mark"
+              aria-hidden="true">W</span><span>WebShield</span></a>
+          <p class="muted footer-copy">Practical, non-invasive checks for
+            website security hygiene.</p>
+        </div>
+        <div class="footer-links">
+          <strong>Explore</strong>
+          <a href="{{ url_for('index') }}">Scanner</a>
+          <a href="{{ url_for('about') }}">Methodology & limits</a>
+          <a href="{{ url_for('index') }}#safety">Responsible use</a>
+        </div>
+        <div class="footer-links">
+          <strong>Project</strong>
+          <a href="mailto:security@example.invalid">Contact by email</a>
+          <a href="https://owasp.org/www-project-top-ten/" target="_blank"
+            rel="noopener noreferrer">OWASP Top 10 ↗</a>
+          <span class="muted">Educational defensive tool</span>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <span>© <span id="copyright-year">2026</span> WebShield. Built for
+          responsible security testing.</span>
+        <span class="muted">Never scan systems without permission.</span>
+      </div>
+    </footer>
+  </body>
+</html>

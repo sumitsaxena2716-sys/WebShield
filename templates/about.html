@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Methodology & Limitations — WebShield{% endblock %}
+{% block meta_description %}Learn what WebShield checks, how it handles targets
+safely, and what its findings cannot prove.{% endblock %}
+{% block content %}
+<section class="page-hero"><div class="container narrow"><div
+            class="eyebrow">DOCUMENTATION</div><h1>Methodology &
+            limitations</h1><p>WebShield is a defensive first-pass checker for
+            basic website configuration hygiene. It is not a penetration-testing
+            platform.</p></div></section>
+<section class="content-section"><div class="container narrow prose">
+        <h2>What it checks</h2>
+        <ul><li>HTTPS usage and TLS certificate verification.</li><li>Presence
+                of common security headers such as CSP, HSTS, Referrer-Policy,
+                and X-Content-Type-Options.</li><li>HTTP response status and
+                redirect behavior.</li><li>HTML title, meta description, favicon
+                link, and viewport metadata.</li><li>A bounded sample of links,
+                with a configurable limit.</li></ul>
+        <h2>Safety controls</h2>
+        <ul><li>Requires an explicit authorization confirmation before
+                scanning.</li><li>Blocks hostnames that resolve to private,
+                loopback, link-local, reserved, or otherwise non-public IP
+                addresses.</li><li>Validates redirect destinations before making
+                the next request and does not automatically follow
+                redirects.</li><li>Uses TLS certificate verification, request
+                timeouts, response-size limits, and rate limiting.</li><li>Uses
+                parameterized SQL statements for scan history and
+                reports.</li></ul>
+        <h2>Important limitations</h2>
+        <p>DNS rebinding and network-level changes can be difficult to eliminate
+            completely in an application-level URL fetcher. For production, run
+            scanning in a dedicated isolated worker/container with strict egress
+            firewall rules, DNS controls, and a hardened proxy. This application
+            should not be exposed as an unrestricted public URL-fetching
+            service.</p>
+        <p>Some sites block automated requests, require JavaScript, or treat
+            HEAD requests differently. A link marked unreachable may not be
+            truly broken. The tool does not test authentication flows,
+            authorization, SQL injection, XSS, CSRF, API access control, source
+            code, or browser-rendered layout overflow.</p>
+        <h2>Score interpretation</h2>
+        <p>The displayed score is a simple checklist score derived from detected
+            findings. It is not an industry-standard rating, risk probability,
+            certification, or guarantee of security. Manually validate findings
+            and prioritize them using your application's context.</p>
+        <h2>Responsible use</h2>
+        <p>Only scan websites you own or have explicit permission to assess.
+            Keep scans low-volume. Do not use the scanner to bypass access
+            controls, probe private systems, or disrupt services.</p>
+        <a class="button button-primary"
+            href="{{ url_for('index') }}#scanner">Return to scanner →</a>
+    </div></section>
+{% endblock %}
